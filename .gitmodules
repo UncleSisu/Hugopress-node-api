@@ -1,0 +1,3 @@
+[submodule "hugo-static-builder-module"]
+	path = hugo-static-builder-module
+	url = https://github.com/UncleSisu/sisu-hugo-static-site-starter.git
