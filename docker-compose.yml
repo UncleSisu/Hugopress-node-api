@@ -1,0 +1,10 @@
+app:
+  build: .
+  command: node_modules/.bin/nodemon index.js
+  environment:
+    NODE_ENV: development
+  ports:
+    - '3000:3000'
+  volumes:
+    - .:/home/app-user/app
+    - /home/app-user/app/node_modules
