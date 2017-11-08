@@ -1,19 +1,17 @@
-FROM node:boron
+# see: http://jdlm.info/articles/2016/03/06/lessons-building-node-app-docker.html
+# FROM node:4.3.2
+# FROM node:boron
+FROM node:8.8.0
 
-# Create app directory
-WORKDIR /usr/src/app
+RUN useradd --user-group --create-home --shell /bin/false app-user
 
-# Install app dependencies
-COPY package.json .
-# For npm@5 or later, copy package-lock.json as well
-# COPY package.json package-lock.json ./
+ENV HOME=/home/app-user
 
+COPY package.json npm-shrinkwrap.json $HOME/app/
+RUN chown -R app-user:app-user $HOME/*
+
+USER app-user
+WORKDIR $HOME/app
 RUN npm install
-# If you are building your code for production
-# RUN npm install --only=production
 
-# Bundle app source
-COPY ./server.js .
-
-EXPOSE 8080
-CMD [ "npm", "start" ]
+CMD ["npm", "start"]
