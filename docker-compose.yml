@@ -1,6 +1,6 @@
 app:
   build: .
-  command: node_modules/.bin/nodemon index.js
+  command: node_modules/.bin/nodemon server.js
   environment:
     NODE_ENV: development
   ports:
