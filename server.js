@@ -27,12 +27,17 @@ app.post('/wp-hugo', (req, res) => {
   if (cmd.text === 'build') {
     console.log('check dir', __dirname);
 
-    let cmd = `cd hugo-static-builder-module
-    yarn hugo-test `
+    // yarn hugo-test
+    let cmd = `
+    cd hugo-static-builder-module
+    yarn build
+    ls -la
+    `;
     exec(cmd , (err, stdout, stderr) => {
       console.log(`Huuuuuugo`, stdout);
       res.send(stdout);
     });
+
   } else {
     console.log(`Huuuuuugo no build today`);
     res.send(cmd.text);
