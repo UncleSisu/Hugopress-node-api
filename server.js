@@ -1,23 +1,14 @@
 'use strict';
 
 const express = require('express');
+const request = require('request');
 const bodyParser = require('body-parser');
 let { exec } = require('child_process');
-
-// TODO: connect wpapi to database
-// const WPAPI = require('wpapi');
-// const wp = new WPAPI({ endpoint: 'http://localhost/starter/wordpress/wp-json/wp/v2/' });
-// const apiPromise = WPAPI.discover('http://localhost/starter/');
-//
-// apiPromise.then(function(site) {
-//   site.posts().then(function(posts) {
-//     console.log('see them posts', posts);
-//   })
-// })
 
 // Constants
 const PORT = 3000;
 const HOST = '0.0.0.0';
+// const WP_URL = `http://127.0.0.1/starter/wordpress/index.php/wp-json/wp/v2`;
 
 // App
 const app = express();
@@ -59,6 +50,19 @@ app.post('/wp-hugo', (req, res) => {
       //   console.log(`Huuuuuugo`, stdout);
       //   res.send(stdout);
       // });
+
+      // request.get({
+      //   url: WP_URL,
+      //   json: true,
+      //   headers: {'Content-Type': 'application/json'},
+      //   timeout: 10000
+      // } , (error, response, data) => {
+      //   if (error) console.log('wp request error', error);
+      //   // console.log('wp request', response, JSON.parse(data));
+      //   console.log('wp request', response, data);
+      //   res.send(wpInstructions);
+      // });
+
       console.log(`Hugo post build-generic`, wpInstructions);
       res.send(wpInstructions);
       break;
