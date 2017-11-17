@@ -1,11 +1,8 @@
 # see: http://jdlm.info/articles/2016/03/06/lessons-building-node-app-docker.html
-# FROM node:4.3.2
-# FROM node:boron
 
 # TODO: adding user screws up permissions right now
-FROM node:8.8.0
-RUN apt-get update && apt-get install -y \
-  libnotify-bin
+# NB: Remember this is not a Debian environs
+FROM mhart/alpine-node:latest
 
 # RUN useradd --user-group --create-home --shell /bin/false app-user
 
