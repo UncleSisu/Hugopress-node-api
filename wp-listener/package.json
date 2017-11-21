@@ -1,0 +1,19 @@
+{
+  "name": "node_wp_hugo_builder_api",
+  "version": "1.0.0",
+  "description": "WordPress_Hugo_Builder API - docker server that puppeteers submodule hugo directory",
+  "author": "First Last <blake@sisumedia.com>",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.13.3",
+    "markdown": "^0.5.0",
+    "request": "^2.83.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.1"
+  }
+}

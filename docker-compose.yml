@@ -1,10 +1,23 @@
-app:
-  build: .
-  command: node_modules/.bin/nodemon server.js
-  environment:
-    NODE_ENV: development
-  ports:
-    - '3000:3000'
-  volumes:
-    - .:/home/app-user/app
-    - /home/app-user/app/node_modules
+version: '3'
+services:
+  wp-listener:
+    build: wp-listener
+    command: node_modules/.bin/nodemon server.js
+    environment:
+      NODE_ENV: development
+      WP_URL: 'http://127.0.0.1/starter/wordpress/index.php/wp-json/wp/v2'
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./wp-listener:/home/app-user/app
+      - /home/app-user/app/node_modules
+  hugo-builder:
+    build: hugo-builder
+    command: node_modules/.bin/nodemon server.js
+    environment:
+      NODE_ENV: development
+    ports:
+      - '3030:3030'
+    volumes:
+      - ./hugo-builder:/home/app-user/app
+      - /home/app-user/app/node_modules
