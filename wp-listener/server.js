@@ -6,11 +6,10 @@ const HugoTransmitter = require('./wares/hugoTransmitter');
 const Md = require('./wares/createMarkdown');
 
 // Constants
-// TODO: cross container discussion
 const PORT = process.env.EXTERNAL_PORT;
 const BUILDER_PORT = process.env.HUGO_BUILDER_PORT;
-const HOST = '0.0.0.0';
 const WP_URL = process.env.WP_URL;
+const HOST = '0.0.0.0';
 const builderUri = `http://hugo-builder:${BUILDER_PORT}/`;
 
 // Constructors
@@ -33,9 +32,9 @@ app.post('/wp-hugo', (req, res) => {
     res,
     {
       instructions: wpInstructions,
-      md: md.constructMarkdown(wpInstructions),
+      mdInfo: md.constructMarkdown(wpInstructions),
     }, 
-    wpInstructions.text,
+    wpInstructions.endpoint,
   );
 });
 

@@ -4,19 +4,19 @@ module.exports = class Md {
   }
 
   constructMarkdown(instructions) {
-    return instructions.text.indexOf('page') > -1 ?
+    return instructions.endpoint.indexOf('page') > -1 ?
       {
         title: instructions.content.post_name,
         date: instructions.content.post_date,
         description: `${this.WP_URL}/${this.inferEndpoint(instructions)}`,
-        type: instructions.content.post_name,
-        md : `
+        type: null,
+        markdown : `
       +++
-      title = "Home"
+      title = ${instructions.content.post_name}
       date = ${instructions.content.post_date}
       description = "${this.WP_URL}/${this.inferEndpoint(instructions)}"
       draft = false
-      type = "${instructions.content.post_name}"
+      type = ""
       menu = "main"
       weight = 1
       +++
