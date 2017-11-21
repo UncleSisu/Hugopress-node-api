@@ -1,26 +1,22 @@
-// const fs = require('fs');
-// const request = require('request');
-// const Executer = require('./abstractExecuter');
-
 module.exports = class Md {
   constructor (WP_URL) {
     this.WP_URL = WP_URL;
   }
 
   constructMarkdown(instructions) {
-    return instructions.text.indexOf('page') > -1 ?
+    return instructions.endpoint.indexOf('page') > -1 ?
       {
         title: instructions.content.post_name,
         date: instructions.content.post_date,
         description: `${this.WP_URL}/${this.inferEndpoint(instructions)}`,
-        type: instructions.content.post_name,
-        md : `
+        type: null,
+        markdown : `
       +++
-      title = "Home"
+      title = ${instructions.content.post_name}
       date = ${instructions.content.post_date}
       description = "${this.WP_URL}/${this.inferEndpoint(instructions)}"
       draft = false
-      type = "${instructions.content.post_name}"
+      type = ""
       menu = "main"
       weight = 1
       +++
