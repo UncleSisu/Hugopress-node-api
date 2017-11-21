@@ -1,7 +1,3 @@
-// const fs = require('fs');
-// const request = require('request');
-// const Executer = require('./abstractExecuter');
-
 module.exports = class Md {
   constructor (WP_URL) {
     this.WP_URL = WP_URL;

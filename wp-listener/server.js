@@ -2,17 +2,16 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-let { exec } = require('child_process');
 const HugoTransmitter = require('./wares/hugoTransmitter');
 const Md = require('./wares/createMarkdown');
 
 // Constants
 // TODO: cross container discussion
-const PORT = 3000;
+const PORT = process.env.EXTERNAL_PORT;
+const BUILDER_PORT = process.env.HUGO_BUILDER_PORT;
 const HOST = '0.0.0.0';
-// const WP_URL = `http://127.0.0.1/starter/wordpress/index.php/wp-json/wp/v2`;
 const WP_URL = process.env.WP_URL;
-const builderUri = 'http://172.19.0.3:3030/';
+const builderUri = `http://hugo-builder:${BUILDER_PORT}/`;
 
 // Constructors
 const hugoTransmitter = new HugoTransmitter(builderUri);
@@ -23,7 +22,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
-  console.log(`Hello from http://${HOST}:${PORT}`);
+  // console.log(`Hello from http://${HOST}:${PORT}`);
   res.send(`Hell'o world\n`);
 });
 

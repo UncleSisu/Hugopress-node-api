@@ -7,7 +7,7 @@ let executer = new Executer(exec);
 
 // Constants
 // TODO: cross container discussion
-const PORT = 3030;
+const PORT = process.env.EXTERNAL_PORT;
 const HOST = '0.0.0.0';
 
 // App
