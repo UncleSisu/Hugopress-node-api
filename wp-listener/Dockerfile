@@ -14,6 +14,5 @@ COPY package.json $HOME/app/
 # USER app-user
 WORKDIR $HOME/app
 RUN npm install
-# RUN npm install gulp-cli -g
 
 CMD ["npm", "start"]

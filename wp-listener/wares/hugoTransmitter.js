@@ -6,10 +6,10 @@ module.exports = class HugoTransmitter {
     this.uri = uri;
   }
 
-  postToHugo(response, payload, cmdType) {
+  postToHugo(response, payload, endpoint) {
 
     request(
-      { uri: `${this.uri}${cmdType}`,
+      { uri: `${this.uri}${endpoint}`,
         method: 'POST',
         json: true,
         body: payload
