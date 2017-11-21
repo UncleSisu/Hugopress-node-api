@@ -16,11 +16,7 @@
 3. Install [Yarn](https://yarnpkg.com/) globally if you don't have it already
 4. Install [Node](https://nodejs.com/) globally if you don't have it already
 5. Fork repo
-6. Using terminal change directories to the project root `cd /path/to/hugo-submodule`
-7. Install dependencies by running `yarn`
-8. Run any of the available commands found below
-9. Go back up to main module, and run `docker-compose up`
-10. Note: The submodule can be pointed to your own fork, just adjust the url in the .gitsubmodule file, and perfrom a `set-url origin` operation within the submodule (this might be extraneous after performing change in the .gitsubmodule file);
+9. Run `docker-compose up` and you've just setup an API that listens to your Wordpress headless CMS and executes build commands dynamically (so we hope!).
 
 ## Commands
 | Command | Description |
@@ -30,5 +26,5 @@
 | `docker-compose rm` | stop docker-compose and images (good for rebuilding) |
 
 ## Project Structure
-- **wares** - Middleware for server
-- **hugo submodule** - module that does the Hugo gruntwork
+- **hugo-builder** - Container that holds Hugo build system
+- **wp-listener** - Container that acts as API to Wordpress (with wp-hugo-builder plugin)
