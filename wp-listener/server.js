@@ -21,8 +21,8 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
-  // console.log(`Hello from http://${HOST}:${PORT}`);
-  res.send(`Hell'o world\n`);
+  console.log(`Hello from http://${HOST}:${PORT} GET`);
+  res.send(true);
 });
 
 app.post('/wp-hugo', (req, res) => {
