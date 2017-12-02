@@ -20,9 +20,17 @@ const md = new Md(WP_URL);
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// TODO: cleaner routing and handling of bad requests
 app.get('/', (req, res) => {
-  console.log(`Hello from http://${HOST}:${PORT} GET`);
-  res.send(true);
+  let routes = app._router.stack
+    .filter((r) => r.route && r.route.path)
+    .reduce((acc, curr) => {
+      acc += curr.route.path + ' ';
+      return acc;
+    }, '');
+
+  console.log(`GETTIN' those routes. ${routes}`);
+  res.send(JSON.stringify({ routes: routes }));
 });
 
 app.post('/wp-hugo', (req, res) => {

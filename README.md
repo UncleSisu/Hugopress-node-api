@@ -1,4 +1,4 @@
-# hugo_builder_node_api
+# Hugopress-node-api
 
 ## Stack
 
@@ -27,4 +27,4 @@
 
 ## Project Structure
 - **hugo-builder** - Container that holds Hugo build system
-- **wp-listener** - Container that acts as API to Wordpress (with wp-hugo-builder plugin)
+- **wp-listener** - Container that acts as API to Wordpress (with wp-hugopress plugin)
