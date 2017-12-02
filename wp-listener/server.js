@@ -1,5 +1,6 @@
 'use strict';
 
+// Dependencies
 const express = require('express');
 const bodyParser = require('body-parser');
 const HugoTransmitter = require('./wares/hugoTransmitter');
@@ -16,13 +17,27 @@ const builderUri = `http://hugo-builder:${BUILDER_PORT}/`;
 const hugoTransmitter = new HugoTransmitter(builderUri);
 const md = new Md(WP_URL);
 
-// App
+// App & router
 const app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
+const router = express.Router();
 
-// TODO: cleaner routing and handling of bad requests
-app.get('/', (req, res) => {
-  let routes = app._router.stack
+// Middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use('/hugopress', router);
+
+router.use(function(req,res,next) {
+  console.log("/" + req.method);
+  next();
+});
+
+// Routes
+router.get('/', (req, res) => {
+  console.log(`Bare endpoint. If server functioning simply returns true boolean`);
+  res.send(true);
+});
+
+router.get('/endpoints', (req, res) => {
+  let routes = router.stack
     .filter((r) => r.route && r.route.path)
     .reduce((acc, curr) => {
       acc += curr.route.path + ' ';
@@ -30,10 +45,10 @@ app.get('/', (req, res) => {
     }, '');
 
   console.log(`GETTIN' those routes. ${routes}`);
-  res.send(JSON.stringify({ routes: routes }));
+  res.json({ 'routes': routes });
 });
 
-app.post('/wp-hugo', (req, res) => {
+router.post('/build', (req, res) => {
   const wpInstructions = JSON.parse(req.body.payload);
 
   hugoTransmitter.postToHugo(
@@ -47,4 +62,5 @@ app.post('/wp-hugo', (req, res) => {
 });
 
 app.listen(PORT, HOST);
+
 console.log(`Running on http://${HOST}:${PORT}`);
